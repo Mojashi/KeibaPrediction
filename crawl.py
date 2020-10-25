@@ -60,7 +60,7 @@ base_url = 'https://db.netkeiba.com/race/'
 
 kuri = False
 
-for year in range(2007,2021):
+for year in range(2020,2021):
     for place in range(1,11):
         for kai in range(1, 6):
             for day in range(1, 13):
