@@ -68,7 +68,11 @@ bool execMain(Proc& proc)
             bef_race = buf.race_id;
         }
         mysql_free_result(res);
-
+        int t;
+        cin >> t;
+        for(int cc = 0 ;t > cc;cc++){
+        string title;
+        cin >> title;
         int m;
         cin >> m;
         vector<int> ids;
@@ -87,14 +91,14 @@ bool execMain(Proc& proc)
         Graph sub = extractGraph(g, ids, time(NULL)/DAY_SEC);
         
         vector<int> pre = rankByGreed(sub);
-        
+        cout << title << ":";
         if(connected(sub) && attends[pre[0]].second >= RETURN_BOUND){
             cout << attends[pre[0]].first << endl;
         }else {
-            cout << attends[pre[0]].first << endl;
-            cout << "NONE" << endl; 
+            cout <<"NONE " <<  attends[pre[0]].first << endl;
         }
-        showGraph(sub,"out.dot", names);
+        showGraph(sub,string()+"out/"+to_string(cc)+".dot", names);
+    }
     } catch (char *e) {
         cerr << "[EXCEPTION] " << e << endl;
         return false;
@@ -106,6 +110,7 @@ bool execMain(Proc& proc)
  * Execution
  */
 int main(){
+    readParams();
     Proc proc;
     execMain(proc);
     return 0;

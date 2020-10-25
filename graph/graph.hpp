@@ -46,3 +46,4 @@ Edge makeEdge(const Race& race, const Result& a, int aid, const Result& b, int b
 void makeEdge(Graph& g, const Race& race, vector<Result>& ress,const map<string,int>& horses);
 // void predict(const Graph& g, const vector<int> attends);
 void showGraph(const Graph& g, string fname, const map<int, string>& names);
+void readParams();

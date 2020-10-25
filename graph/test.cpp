@@ -58,6 +58,7 @@ bool execMain(Proc& proc)
         int bef_race = -1;
 
         vector<float> ekilog;
+        vector<int> datelog;
         ekilog.reserve(50000);
 
         int cou = 0, basecou = 0, edsum = 0, rowi = 0;
@@ -92,6 +93,7 @@ bool execMain(Proc& proc)
                             oddssum += odds;
                         }
                         ekilog.push_back(eki);
+                        datelog.push_back(races[bef_race].date);
                         basecou++;
                         }
                     }
@@ -122,8 +124,8 @@ bool execMain(Proc& proc)
         cout << int(eki) << endl;
         fprintf(stderr, "win:%d/%d(%f) profit:%d(%f) eds:%f odds:%f \n",cou,basecou,cou*1.0/basecou, int(eki), 1+eki/100.0/basecou, edsum*1.0/basecou, oddssum / cou);
 
-        // plt::plot(ekilog);
-        // plt::show();
+        plt::plot(datelog, ekilog);
+        plt::show();
         // Close a MySQL connection
     } catch (char *e) {
         cerr << "[EXCEPTION] " << e << endl;
@@ -137,6 +139,7 @@ bool execMain(Proc& proc)
  */
 int main(){
     Proc proc;
+    readParams();
     execMain(proc);
     return 0;
 }

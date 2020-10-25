@@ -29,6 +29,24 @@ float sitCoeffAr[3][5000] = {};
 const int MAX_NUMHORSE = 18;
 const int DAY_SEC = 86400;
 
+void readParams(){
+    ifstream ifs("param.cnf");
+    string line;
+    while(getline(ifs, line)){
+        int eq = line.find("=");
+        if(eq == -1) continue;
+        string pname = line.substr(0, eq), value = line.substr(eq + 1, line.size() - eq - 1);
+        if(pname == "INDIRECT_COEFF") INDIRECT_COEFF = atof(value.c_str());
+        if(pname == "MIRROR_COEFF")   MIRROR_COEFF = atof(value.c_str());
+        if(pname == "CENTER_COEFF") CENTER_COEFF = atof(value.c_str());
+        if(pname == "WEIGHT_BOUND") WEIGHT_BOUND = atof(value.c_str());
+        if(pname == "HANGEN") hangen = atof(value.c_str());
+        if(pname == "PACE") pace = atof(value.c_str());
+        if(pname == "MAX_LATE") MAX_LATE = atof(value.c_str());
+        if(pname == "RETURN_BOUND") RETURN_BOUND = atof(value.c_str());
+    }
+}
+
 Edge makeEdge(const Race& race, const Result& a, int aid, const Result& b, int bid){
     return {aid,bid, min(MAX_LATE, (a.time - b.time)*sitCoeff(race)), 1, int(race.date/DAY_SEC)};
 }
